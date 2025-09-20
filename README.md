@@ -15,45 +15,59 @@ CodeMind transforms business ideas into complete, production-ready applications 
 npm run dev
 ```
 
-## 🏗️ Architecture
+## 🏗️ Current Architecture
 
-CodeMind is built as a distributed system with the following components:
+CodeMind is a **working cognitive software factory** with these operational components:
 
-- **Frontend**: Next.js 14 with TypeScript
-- **Backend**: FastAPI with Python + Rust services
-- **Orchestration**: Temporal workflows + NATS messaging
-- **AI/ML**: AWS Bedrock + Azure OpenAI with smart routing
-- **Data**: PostgreSQL + Redis + Qdrant + Neo4j
-- **Infrastructure**: Kubernetes + Istio + Kong
+- **✅ Frontend**: Next.js 14 with TypeScript (LIVE on :3000)
+- **✅ Backend**: FastAPI with intelligent LLM routing (LIVE on :8000)
+- **✅ AI/ML**: AWS Bedrock Claude 3.7 + Azure OpenAI integration
+- **✅ Data**: PostgreSQL + Redis + Qdrant via NodePort K8s services
+- **✅ Infrastructure**: Kubernetes cluster with NodePort services
 
-## 📁 Project Structure
+## 📁 **ACTUAL** Project Structure
 
 ```
-codemind/
-├── apps/                           # Applications
-│   ├── web/                        # Next.js frontend
-│   ├── api/                        # FastAPI backend
-│   └── workers/                    # Temporal workers
-├── services/                       # Microservices
-│   ├── business-intent/            # Business understanding
-│   ├── code-generator/             # Code generation
-│   ├── llm-router/                 # Model routing
-│   ├── verifier/                   # Verification (Rust)
-│   ├── deployment/                 # App deployment
-│   └── evolution/                  # Living software
-├── packages/                       # Shared packages
-│   ├── shared/                     # Common utilities
-│   ├── types/                      # TypeScript types
-│   └── ui/                         # UI components
-├── infrastructure/                 # Infrastructure as Code
-│   ├── k8s/                        # Kubernetes manifests
-│   ├── helm/                       # Helm charts
-│   └── terraform/                  # Terraform configs
-├── workflows/                      # Temporal workflows
-│   ├── application-generation/     # Main workflows
-│   └── activities/                 # Workflow activities
-└── docs/                          # Documentation
+codemind/                          # Main repository (monorepo)
+├── apps/                          # ✅ WORKING Applications
+│   ├── frontend/                  # ✅ Next.js 14 UI (localhost:3000)
+│   │   ├── src/app/page.tsx      # Business intent analysis interface
+│   │   └── src/components/ui/    # shadcn/ui components
+│   └── api/                      # ✅ FastAPI backend (localhost:8000)
+│       ├── api/v1/endpoints/     # REST API endpoints
+│       ├── core/                 # Configuration & database
+│       ├── middleware/           # Auth, rate limiting, context
+│       ├── models/               # Pydantic models
+│       ├── services/             # LLM router & business logic
+│       └── app.py               # Main FastAPI application
+├── infrastructure/               # ✅ DEPLOYED Infrastructure
+│   ├── k8s/                     # Kubernetes manifests (NodePort)
+│   │   ├── nodeport-services.yaml # Service definitions
+│   │   └── qdrant-simple.yaml    # Vector database
+│   └── scripts/                 # Deployment automation
+├── docs/                        # ✅ COMPLETE Documentation
+│   ├── INDEX.md                 # Documentation index
+│   ├── IMPLEMENTATION_SUMMARY.md # Technical summary
+│   ├── codemind-startup-blueprint.md # 73KB comprehensive guide
+│   └── [5 more comprehensive docs]
+└── scripts/                     # ✅ Deployment scripts
+    └── deploy-infrastructure.sh  # One-command K8s deployment
 ```
+
+### **📊 What's Working vs Planned**
+- **✅ WORKING**: Frontend, API, Infrastructure, Documentation
+- **🔮 PLANNED**: Advanced microservices, Temporal workflows, multi-agent orchestration
+
+## 🏢 **Repository Organization**
+
+**📍 This is the MAIN repository** containing the complete working system:
+- **Monorepo approach**: All working code in one place
+- **Component repos**: Separate repos exist for modular access:
+  - [`codemind-frontend`](https://github.com/QuantumLayerPlatform-dev-ai/codemind-frontend) - Frontend only
+  - [`codemind-api`](https://github.com/QuantumLayerPlatform-dev-ai/codemind-api) - API only
+  - [`codemind-infrastructure`](https://github.com/QuantumLayerPlatform-dev-ai/codemind-infrastructure) - K8s only
+
+**💡 Recommendation**: Use this main repository for development and contributions.
 
 ## 🎯 Development Phases
 
@@ -85,16 +99,16 @@ codemind/
 - ✅ Error handling & loading states
 - ✅ Production-ready deployment
 
-## 🛠️ Technology Stack
+## 🛠️ **ACTUAL** Technology Stack
 
-| Layer | Technologies |
-|-------|-------------|
-| Frontend | Next.js 14, TypeScript, Tailwind, shadcn/ui |
-| Backend | Python (FastAPI), Rust (Axum), Node.js |
-| Orchestration | Temporal, NATS JetStream, Redis Streams |
-| AI/ML | AWS Bedrock, Azure OpenAI, Qdrant, Z3 |
-| Data | PostgreSQL, Redis, Neo4j, TimescaleDB |
-| Infrastructure | Kubernetes, Istio, Kong, Prometheus |
+| Layer | **✅ IMPLEMENTED** | 🔮 Planned |
+|-------|------------------|------------|
+| **Frontend** | Next.js 14, TypeScript, Tailwind, shadcn/ui | - |
+| **Backend** | Python (FastAPI), AsyncPG, Pydantic | Rust microservices |
+| **AI/ML** | AWS Bedrock (Claude 3.7), Azure OpenAI | Z3, Advanced routing |
+| **Data** | PostgreSQL, Redis, Qdrant | Neo4j, TimescaleDB |
+| **Infrastructure** | Kubernetes, NodePort services | Istio, Kong, Prometheus |
+| **Messaging** | Basic HTTP APIs | NATS JetStream, Temporal |
 
 ## 📊 Current Status
 

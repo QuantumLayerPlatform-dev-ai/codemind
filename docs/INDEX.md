@@ -20,25 +20,30 @@ Welcome to the comprehensive documentation for CodeMind - the world's first cogn
 
 ## 🚀 Component Documentation
 
-Each component has its own detailed documentation:
-
-### **Frontend** - Next.js 14 UI
-🔗 **Repository**: [codemind-frontend](https://github.com/QuantumLayerPlatform-dev-ai/codemind-frontend)
+### **Frontend** - Next.js 14 UI ✅ WORKING
+📁 **Location**: `/apps/frontend/` | 🔗 **Repo**: [codemind-frontend](https://github.com/QuantumLayerPlatform-dev-ai/codemind-frontend)
 - Professional React interface with shadcn/ui
-- Real-time API integration
-- Enterprise UX with loading states
+- Real-time API integration with business intent analysis
+- Enterprise UX with loading states and error handling
 
-### **API** - FastAPI Backend
-🔗 **Repository**: [codemind-api](https://github.com/QuantumLayerPlatform-dev-ai/codemind-api)
+### **API** - FastAPI Backend ✅ WORKING
+📁 **Location**: `/apps/api/` | 🔗 **Repo**: [codemind-api](https://github.com/QuantumLayerPlatform-dev-ai/codemind-api)
 - Intelligent LLM routing (Claude 3.7, Azure OpenAI)
-- Enterprise middleware and security
-- Production-ready architecture
+- Enterprise middleware (auth, rate limiting, context tracking)
+- Production-ready modular architecture
 
-### **Infrastructure** - Kubernetes
-🔗 **Repository**: [codemind-infrastructure](https://github.com/QuantumLayerPlatform-dev-ai/codemind-infrastructure)
-- K8s manifests for all services
-- NodePort deployment strategy
+### **Infrastructure** - Kubernetes ✅ DEPLOYED
+📁 **Location**: `/infrastructure/` | 🔗 **Repo**: [codemind-infrastructure](https://github.com/QuantumLayerPlatform-dev-ai/codemind-infrastructure)
+- K8s manifests for all services (NodePort strategy)
 - One-command deployment scripts
+- PostgreSQL, Redis, Qdrant, NATS, Temporal, MinIO
+
+## 📁 **Repository Structure**
+
+**This is a monorepo** containing all working components:
+- **Main development**: Use this repository
+- **Component access**: Individual repos available for focused work
+- **Documentation**: Comprehensive docs in `/docs/` directory
 
 ## 🎯 Current System Status
 
