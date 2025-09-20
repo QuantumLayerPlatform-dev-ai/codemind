@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codemind-api
+  namespace: codemind
+  labels:
+    app: codemind-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: codemind-api
+  template:
+    metadata:
+      labels:
+        app: codemind-api
+    spec:
+      containers:
+      - name: codemind-api
+        image: ghcr.io/quantumlayerplatform-dev-ai/codemind-api:0.1.6
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://postgres:codemind-dev-password@postgresql:5432/codemind"
+        - name: ASYNC_DATABASE_URL
+          value: "postgresql+asyncpg://postgres:codemind-dev-password@postgresql:5432/codemind"
+        - name: REDIS_URL
+          value: "redis://:codemind-dev-password@redis-master:6379"
+        - name: QDRANT_URL
+          value: "http://qdrant-simple:6333"
+        - name: TEMPORAL_HOST
+          value: "temporal-frontend"
+        - name: TEMPORAL_PORT
+          value: "7233"
+        - name: NATS_URL
+          value: "nats://nats:4222"
+        - name: MINIO_ENDPOINT
+          value: "minio:9000"
+        - name: AWS_REGION
+          value: "eu-west-2"
+        - name: AZURE_REGION
+          value: "uksouth"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: codemind-api
+  namespace: codemind
+  labels:
+    app: codemind-api
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: codemind-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: codemind-api-nodeport
+  namespace: codemind
+  labels:
+    app: codemind-api
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+    nodePort: 30800
+    protocol: TCP
+    name: http
+  selector:
+    app: codemind-api
