@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qdrant-simple
+  namespace: codemind
+  labels:
+    app: qdrant-simple
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qdrant-simple
+  template:
+    metadata:
+      labels:
+        app: qdrant-simple
+    spec:
+      containers:
+      - name: qdrant
+        image: qdrant/qdrant:v1.15.4
+        ports:
+        - containerPort: 6333
+          name: http
+        - containerPort: 6334
+          name: grpc
+        volumeMounts:
+        - name: storage
+          mountPath: /qdrant/storage
+        env:
+        - name: QDRANT__CLUSTER__ENABLED
+          value: "false"
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 6333
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /readyz
+            port: 6333
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: storage
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant-simple
+  namespace: codemind
+  labels:
+    app: qdrant-simple
+spec:
+  selector:
+    app: qdrant-simple
+  ports:
+  - name: http
+    port: 6333
+    targetPort: 6333
+  - name: grpc
+    port: 6334
+    targetPort: 6334
+  type: ClusterIP

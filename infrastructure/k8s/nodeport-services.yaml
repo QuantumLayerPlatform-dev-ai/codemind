@@ -1,0 +1,108 @@
+---
+# PostgreSQL NodePort Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-nodeport
+  namespace: codemind
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      targetPort: 5432
+      nodePort: 30432
+  selector:
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/component: primary
+
+---
+# Redis NodePort Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-nodeport
+  namespace: codemind
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      targetPort: 6379
+      nodePort: 30379
+  selector:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/component: master
+
+---
+# Qdrant NodePort Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant-nodeport
+  namespace: codemind
+spec:
+  type: NodePort
+  ports:
+    - port: 6333
+      targetPort: 6333
+      nodePort: 30333
+      name: http
+    - port: 6334
+      targetPort: 6334
+      nodePort: 30334
+      name: grpc
+  selector:
+    app: qdrant-simple
+
+---
+# NATS NodePort Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats-nodeport
+  namespace: codemind
+spec:
+  type: NodePort
+  ports:
+    - port: 4222
+      targetPort: 4222
+      nodePort: 30422
+  selector:
+    app.kubernetes.io/name: nats
+
+---
+# Temporal Frontend NodePort Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: temporal-frontend-nodeport
+  namespace: codemind
+spec:
+  type: NodePort
+  ports:
+    - port: 7233
+      targetPort: 7233
+      nodePort: 30233
+  selector:
+    app.kubernetes.io/name: temporal
+    app.kubernetes.io/component: frontend
+
+---
+# MinIO NodePort Service (for file storage)
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-nodeport
+  namespace: codemind
+spec:
+  type: NodePort
+  ports:
+    - port: 9000
+      targetPort: 9000
+      nodePort: 30900
+      name: api
+    - port: 9090
+      targetPort: 9090
+      nodePort: 30909
+      name: console
+  selector:
+    app.kubernetes.io/name: minio
